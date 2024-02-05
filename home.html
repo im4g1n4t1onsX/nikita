@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Valentine's Website</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bierstadt+Display:wght@500&display=swap">
+
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            min-width: 100vw;
+            margin: 0;
+            flex-direction: column;
+            font-family: 'Bierstadt Display', sans-serif;
+            background-image: url('https://static.vecteezy.com/system/resources/previews/018/853/810/original/cute-and-simple-love-pattern-for-background-valentine-wallpaper-design-vector.jpg');
+            background-size: cover; /* Ensure the background covers the entire viewport */
+            background-repeat: no-repeat; /* Prevent the background from repeating */
+            color: #ff69b4;
+            position: relative;
+        }
+
+        img {
+            max-width: 100%;
+            margin-bottom: 20px; /* Adjusted margin to move it up */
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #ff69b4;
+            margin-top: -20px; /* Adjusted negative margin to move headers up more */
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            width: 200px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #ff69b4;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <img src="https://media.tenor.com/Eog9WTKDMAkAAAAM/cat-and-flower.gif" alt="Cat and Flower GIF">
+    
+    <h1 id="heyDarling">Hey Darling</h1>
+    
+    <h2 id="questionText">Do you want to be my Valentine?</h2>
+
+    <div class="button-container">
+        <button onclick="handleYes()">Yes</button>
+        <button onclick="moveNoButton()">No</button>
+    </div>
+
+    <script>
+        let noButtonClickCount = 0;
+
+        function handleYes() {
+            document.querySelector('#heyDarling').innerText = "See you on the 14th Nikita ❤️";
+            document.querySelector('#questionText').style.display = 'none';
+            document.querySelector('img').src = 'https://i.pinimg.com/originals/f2/fe/e1/f2fee18928e2a527a800fe311ba4a955.gif';
+        }
+
+        function moveNoButton() {
+            const button = document.querySelector('.button-container button:last-child');
+            const maxWidth = window.innerWidth - button.clientWidth;
+            const maxHeight = window.innerHeight - button.clientHeight;
+
+            noButtonClickCount++;
+
+            if (noButtonClickCount === 1) {
+                // First click
+                const newImageSrc = 'https://pbs.twimg.com/media/FJ5pepPWQAcRrqJ.jpg';
+                document.querySelector('img').src = newImageSrc;
+                const randomX = Math.max(10, Math.min(maxWidth - 10, Math.random() * maxWidth));
+                const randomY = Math.max(10, Math.min(maxHeight - 10, Math.random() * maxHeight));
+                button.style.position = 'absolute';
+                button.style.left = randomX + 'px';
+                button.style.top = randomY + 'px';
+            } else if (noButtonClickCount === 2) {
+                // Second click
+                const currentLeft = parseInt(button.style.left) || 0;
+                const currentTop = parseInt(button.style.top) || 0;
+                button.style.left = currentLeft + 150 + 'px';
+                button.style.top = currentTop - 40 + 'px';
+            } else if (noButtonClickCount === 3) {
+                // Third click
+                const currentLeft = parseInt(button.style.left) || 0;
+                const currentTop = parseInt(button.style.top) || 0;
+                button.style.left = currentLeft - 60 + 'px';
+                button.style.top = currentTop + 20 + 'px';
+            } else if (noButtonClickCount === 4) {
+                // Fourth click
+                const currentLeft = parseInt(button.style.left) || 0;
+                const currentTop = parseInt(button.style.top) || 0;
+                button.style.left = currentLeft + 30 + 'px';
+                button.style.top = currentTop - 40 + 'px';
+                noButtonClickCount = 0; // Reset the count
+            }
+
+            // Change header text after each click
+            document.querySelector('#heyDarling').style.display = 'none';
+            document.querySelector('h2').innerText = "My darling, the no button is just for visuals";
+        }
+    </script>
+
+</body>
+</html>
